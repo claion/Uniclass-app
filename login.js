@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 
 export default class LoginView extends Component {
-
   constructor(props) {
     super(props);
     state = {
@@ -21,40 +20,41 @@ export default class LoginView extends Component {
   }
 
   onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+    Alert.alert("알림", viewId + " 버튼이 눌렸어요");
   }
 
   render() {
     return (
       <View style={styles.container}>
+        <Image style={styles.logoContainer} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/81/Emoji_u1f981.svg/2000px-Emoji_u1f981.svg.png'}}/>
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/512/user-icon.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Email"
+              placeholder="EMAIL"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
         </View>
         
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Keyboard-icon_Wikipedians.svg/1024px-Keyboard-icon_Wikipedians.svg.png'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Password"
+              placeholder="PASSWORD"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
-          <Text style={styles.loginText}>Login</Text>
+        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+          <Text style={styles.loginText}>로그인</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
-            <Text>Forgot your password?</Text>
+        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.registerButton]} onPress={() => this.onClickListener('register')}>
+        <Text style={styles.registerText}>회원가입</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
-            <Text>Register</Text>
+        <TouchableHighlight underlayColor="transparent" style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
+           <Text>아이디/비밀번호 찾기</Text>
         </TouchableHighlight>
       </View>
     );
@@ -66,7 +66,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DCDCDC',
+    backgroundColor: '#DEEBF7',
+  },
+  logoContainer: {
+    width:150,
+    height:150,
+    marginTop: 50,
+    marginBottom: 20,
+    justifyContent: 'center',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
@@ -86,10 +93,10 @@ const styles = StyleSheet.create({
       flex:1,
   },
   inputIcon:{
-    width:30,
-    height:30,
+    width:20,
+    height:20,
     marginLeft:15,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   buttonContainer: {
     height:45,
@@ -98,12 +105,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom:20,
     width:250,
-    borderRadius:30,
+    borderRadius:20,
   },
   loginButton: {
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1.5,
+    borderColor: "#00b5ec",
+  },
+  registerButton: {
     backgroundColor: "#00b5ec",
   },
   loginText: {
+    color: 'black',
+  },
+  registerText: {
     color: 'white',
   }
 });
