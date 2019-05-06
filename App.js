@@ -1,21 +1,17 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import LoginScreen from './screens/loginScreen';
+import Loading from './components/loading';
 
 export default class App extends React.Component {
+  state = {
+    loading: false
+  }
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
+    const {loading} = this.state;
+    if (loading) {
+      return <Loading/>
+    } else {
+      return <LoginScreen />
+    } 
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
