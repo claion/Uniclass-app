@@ -10,8 +10,8 @@ import {
   Alert
 } from 'react-native';
 
-
 export default class LoginView extends Component {
+
   constructor(props) {
     super(props);
     state = {
@@ -28,33 +28,33 @@ export default class LoginView extends Component {
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/512/user-icon.png'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/message/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="ID"
+              placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(email) => this.setState({email})}/>
         </View>
         
         <View style={styles.inputContainer}>
-          <Image style={styles.inputIcon} source={{uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Keyboard-icon_Wikipedians.svg/1024px-Keyboard-icon_Wikipedians.svg.png'}}/>
+          <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/key-2/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="PASSWORD"
+              placeholder="Password"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
-          <Text style={styles.loginText}>로그인</Text>
+        <TouchableHighlight style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+          <Text style={styles.loginText}>Login</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.registerButton]} onPress={() => this.onClickListener('register')}>
-        <Text style={styles.registerText}>회원가입</Text>
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
+            <Text>Forgot your password?</Text>
         </TouchableHighlight>
 
-        <TouchableHighlight underlayColor="transparent" style={styles.buttonContainer} onPress={() => this.onClickListener('restore_password')}>
-           <Text>아이디/비밀번호 찾기</Text>
+        <TouchableHighlight style={styles.buttonContainer} onPress={() => this.onClickListener('register')}>
+            <Text>Register</Text>
         </TouchableHighlight>
       </View>
     );
@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DEEBF7',
+    backgroundColor: '#DCDCDC',
   },
   inputContainer: {
       borderBottomColor: '#F5FCFF',
@@ -86,18 +86,11 @@ const styles = StyleSheet.create({
       flex:1,
   },
   inputIcon:{
-    width:20,
-    height:20,
+    width:30,
+    height:30,
     marginLeft:15,
-    justifyContent: 'center',
+    justifyContent: 'center'
   },
-  miniIcon:{
-    width:10,
-    height:10,
-    marginLeft:15,
-    justifyContent: 'center',
-  },
-
   buttonContainer: {
     height:45,
     flexDirection: 'row',
@@ -105,18 +98,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom:20,
     width:250,
-    borderRadius:20,
+    borderRadius:30,
   },
   loginButton: {
-    backgroundColor: "#FFFFFF",
-  },
-  registerButton: {
     backgroundColor: "#00b5ec",
   },
   loginText: {
-    color: 'black',
-  },
-  registerText: {
     color: 'white',
   }
 });
