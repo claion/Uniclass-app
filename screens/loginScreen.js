@@ -8,6 +8,7 @@ import {
   Image,
   Alert
 } from 'react-native';
+import {MAIN_COLOR} from '../constants/colors'
 
 export default class extends Component {
   constructor(props) {
@@ -20,6 +21,11 @@ export default class extends Component {
 
   onClickListener = (viewId) => {
     Alert.alert("알림", viewId + " 버튼이 눌렸어요");
+  }
+
+  onLoginClick = () => {
+    const {navigation: {navigate}} = this.props;
+    navigate('MainScreen')
   }
 
   render() {
@@ -44,7 +50,7 @@ export default class extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onLoginClick()}>
           <Text style={styles.loginText}>로그인</Text>
         </TouchableHighlight>
 
@@ -65,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DEEBF7',
+    backgroundColor: MAIN_COLOR,
   },
   logoContainer: {
     width:150,
