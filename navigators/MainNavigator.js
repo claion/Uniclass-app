@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'; 
 
-import HomeTab from './AppTabNavigator/HomeTab';
-import InternalTab from './AppTabNavigator/InternalTab';
-import ExternalTab from './AppTabNavigator/ExternalTab';
-import ProfileTab from './AppTabNavigator/ProfileTab';
+import HomeTab from '../screens/TabScreen/HomeTab';
+import InternalTab from '../screens/TabScreen/InternalTab';
+import ExternalTab from '../screens/TabScreen/ExternalTab';
+import ProfileTab from '../screens/TabScreen/ProfileTab';
 
 
 const AppTabNavigator = createBottomTabNavigator({ //하단 탭 생성

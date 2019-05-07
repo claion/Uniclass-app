@@ -8,6 +8,7 @@ import {
   Image,
   Alert
 } from 'react-native';
+import {MAIN_COLOR} from '../constants/colors'
 
 export default class extends Component {
   constructor(props) {
@@ -70,7 +71,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#DEEBF7',
+    backgroundColor: MAIN_COLOR,
   },
   logoContainer: {
     width:150,

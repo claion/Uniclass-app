@@ -1,4 +1,4 @@
-import Loading from '../components/loading'
+import Loading from '../components/Loading'
 import React from 'react';
 
 export default class extends React.PureComponent {
@@ -17,7 +17,7 @@ export default class extends React.PureComponent {
         const {navigation: {navigate}} = this.props;
         setTimeout(() => {
             navigate('Login')
-        }, 3);
+        }, 3000);
     }
 
     render() {

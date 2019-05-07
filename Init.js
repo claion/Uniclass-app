@@ -1,8 +1,8 @@
-import React from 'react';
-import CheckLogin from './screens/checkLoginScreen';
+import CheckLogin from './screens/CheckLoginScreen';
 import { createStackNavigator, createAppContainer, createSwitchNavigator } from 'react-navigation';
-import MainScreen from './components/MainScreen';
-import Login from './screens/loginScreen';
+import MainScreen from './navigators/MainNavigator';
+import Login from './screens/LoginScreen';
+import {MAIN_COLOR} from './constants/colors'
 
 
 const AppStackNavigator = createStackNavigator({
@@ -11,7 +11,7 @@ const AppStackNavigator = createStackNavigator({
       navigationOptions: {
         title: 'UniCLASS',
       headerStyle: {
-          backgroundColor: '#197AFF'
+          backgroundColor: MAIN_COLOR
       },
       headerTintColor: '#fff',
       }
