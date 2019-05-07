@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { Icon } from 'native-base';
 import { createBottomTabNavigator, createAppContainer } from 'react-navigation'; 
 
 import HomeTab from './AppTabNavigator/HomeTab';
@@ -16,21 +14,6 @@ const AppTabNavigator = createBottomTabNavigator({ //하단 탭 생성
     ProfileTab: { screen: ProfileTab }
 });
 
-const AppTabContainet = createAppContainer(AppTabNavigator);
+const AppTabContainer = createAppContainer(AppTabNavigator);
 
-export default class MainScreen extends Component {
-
-    static navigationOptions = 
-    {
-        title: 'UniCLASS',
-        headerStyle: {
-            backgroundColor: '#197AFF'
-        },
-        headerTintColor: '#fff',        
-    }
-    render() {
-        return (
-            <AppTabContainet/>
-        );
-    }
-}
+export default AppTabContainer;

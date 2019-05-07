@@ -22,6 +22,11 @@ export default class extends Component {
     Alert.alert("알림", viewId + " 버튼이 눌렸어요");
   }
 
+  onLoginClick = () => {
+    const {navigation: {navigate}} = this.props;
+    navigate('MainScreen')
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -44,7 +49,7 @@ export default class extends Component {
               onChangeText={(password) => this.setState({password})}/>
         </View>
 
-        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onClickListener('login')}>
+        <TouchableHighlight underlayColor="transparent" style={[styles.buttonContainer, styles.loginButton]} onPress={() => this.onLoginClick()}>
           <Text style={styles.loginText}>로그인</Text>
         </TouchableHighlight>
 
