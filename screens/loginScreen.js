@@ -10,6 +10,7 @@ import {
 } from 'react-native';
 import {MAIN_COLOR} from '../constants/colors'
 
+
 export default class extends Component {
   constructor(props) {
     super(props);
