@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import {
-  StyleSheet,
   Text,
-  View,
-  TextInput,
-  TouchableHighlight,
-  Image,
   Alert
 } from 'react-native';
 import styled from 'styled-components';
@@ -15,9 +10,10 @@ import { MAIN_COLOR } from '../constants/colors';
 export default class extends Component {
   constructor(props) {
     super(props);
-    state = {
-      email: '',
-      password: ''
+    this.state = {
+      username: '',
+      password: '',
+      logging: false
     };
   }
 
@@ -25,14 +21,16 @@ export default class extends Component {
     Alert.alert('알림', viewId + ' 버튼이 눌렸어요');
   };
 
-  onLoginClick = () => {
+  login() {
     const {
       navigation: { navigate }
     } = this.props;
-    navigate('MainScreen');
+    this.setState({logging: true})
+    setTimeout(() => navigate('MainScreen'), 3000)
   };
 
   render() {
+    const {logging} = this.state;
     return (
       <Container>
         <Logo
@@ -42,62 +40,67 @@ export default class extends Component {
           }}
         />
         <InputContainer>
-          <Image
-            style={styles.inputIcon}
+          <InputIcon
             source={{
               uri:
                 'http://icons.iconarchive.com/icons/custom-icon-design/silky-line-user/512/user-icon.png'
             }}
           />
-          <TextInput
-            style={styles.inputs}
-            placeholder="EMAIL"
-            keyboardType="email-address"
+          <Inputs
+            placeholder="ID"
+            returnKeyType="next"
+            textContentType="username"
+            autoCapitalize="none"
+            autoCorrect={false}
+            onSubmitEditing={() => {
+              this.passwordInput.focus();
+            }}
             underlineColorAndroid="transparent"
-            onChangeText={email => this.setState({ email })}
+            onChangeText={username => this.setState({ username })}
           />
         </InputContainer>
 
         <InputContainer>
-          <Image
-            style={styles.inputIcon}
+          <InputIcon
             source={{
               uri:
                 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Keyboard-icon_Wikipedians.svg/1024px-Keyboard-icon_Wikipedians.svg.png'
             }}
           />
-          <TextInput
-            style={styles.inputs}
+          <Inputs
+            ref={(ref) => {this.passwordInput = ref}}
+            returnKeyType="done"
             placeholder="PASSWORD"
+            textContentType="password"
+            autoCapitalize="none"
+            autoCorrect={false}
             secureTextEntry={true}
             underlineColorAndroid="transparent"
             onChangeText={password => this.setState({ password })}
+            onSubmitEditing={this.login.bind(this)}
           />
         </InputContainer>
 
-        <TouchableHighlight
+        <LoginBtn
           underlayColor="transparent"
-          style={[styles.buttonContainer, styles.loginButton]}
-          onPress={() => this.onLoginClick()}
+          onPress={this.login.bind(this)}
         >
-          <Text style={styles.loginText}>로그인</Text>
-        </TouchableHighlight>
+          <LoginText>{!logging ? "로그인" : "..."}</LoginText>
+        </LoginBtn>
 
-        <TouchableHighlight
+        <RegisterBtn
           underlayColor="transparent"
-          style={[styles.buttonContainer, styles.registerButton]}
           onPress={() => this.onClickListener('register')}
         >
-          <Text style={styles.registerText}>회원가입</Text>
-        </TouchableHighlight>
+          <RegisterText>회원가입</RegisterText>
+        </RegisterBtn>
 
-        <TouchableHighlight
+        <BtnInterface
           underlayColor="transparent"
-          style={styles.buttonContainer}
           onPress={() => this.onClickListener('restore_password')}
         >
           <Text>아이디/비밀번호 찾기</Text>
-        </TouchableHighlight>
+        </BtnInterface>
       </Container>
     );
   }
@@ -119,8 +122,8 @@ const Logo = styled.Image`
 `;
 
 const InputContainer = styled.View`
-  border-bottom-color: '#F5FCFF';
-  background-color: 'white';
+  border-bottom-color: #F5FCFF;
+  background-color: white;
   border-radius: 30px;
   border-bottom-width: 1;
   width: 250px;
@@ -130,51 +133,43 @@ const InputContainer = styled.View`
   align-items: center;
 `;
 
-const styles = StyleSheet.create({
-  inputContainer: {
-    borderBottomColor: '#F5FCFF',
-    backgroundColor: '#FFFFFF',
-    borderRadius: 30,
-    borderBottomWidth: 1,
-    width: 250,
-    height: 45,
-    marginBottom: 20,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  inputs: {
-    height: 45,
-    marginLeft: 16,
-    borderBottomColor: '#FFFFFF',
-    flex: 1
-  },
-  inputIcon: {
-    width: 20,
-    height: 20,
-    marginLeft: 15,
-    justifyContent: 'center'
-  },
-  buttonContainer: {
-    height: 45,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 20,
-    width: 250,
-    borderRadius: 20
-  },
-  loginButton: {
-    backgroundColor: '#FFFFFF',
-    borderWidth: 1.5,
-    borderColor: '#00b5ec'
-  },
-  registerButton: {
-    backgroundColor: '#00b5ec'
-  },
-  loginText: {
-    color: 'black'
-  },
-  registerText: {
-    color: 'white'
-  }
-});
+const Inputs = styled.TextInput `
+  height: 45px;
+  margin-left: 16px;
+  border-bottom-color: white;
+  flex: 1;
+`
+
+const InputIcon = styled.Image `
+  width: 20px;
+  height: 20px;
+  margin-left: 15px;
+  justify-content: center;
+`
+
+const BtnInterface = styled.TouchableOpacity `
+  height: 45px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  width: 250px;
+  border-radius: 20px
+`
+
+const LoginBtn = styled(BtnInterface)`
+  background-color: white;
+  border-width: 1.5px;
+  border-color: #00b5ec;
+`
+
+const RegisterBtn = styled(BtnInterface)`
+  background-color: #00b5ec;
+`
+const LoginText = styled.Text `
+  color: black;
+`
+
+const RegisterText = styled.Text `
+  color: white;
+`
