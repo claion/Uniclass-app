@@ -1,47 +1,25 @@
-import React, { Component } from 'react';
-import {
-  Text,
-  Alert
-} from 'react-native';
+import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import {ActivityIndicator} from 'react-native';
 import colors from '../../constants/colors';
-import {login} from '../../redux/user/actionsCreators'
 
+export default class extends React.Component {
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+    onChangeValue: PropTypes.func.isRequired,
 
-export default class extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      username: '',
-      password: '',
-      logging: false
-    };
-    console.log(props);
-  }
-
-  handleSubmit(e) {
-    e.preventDefault();
-    const {dispatch} = this.props;
-    const {username, password} = this.state;
-    console.log(username, password);
-    dispatch(login(username, password))
+    isSubmitting: PropTypes.bool.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
   }
 
   onClickListener = viewId => {
     Alert.alert('알림', viewId + ' 버튼이 눌렸어요');
   };
 
-  login() {
-    const {
-      navigation: { navigate }
-    } = this.props;
-    this.setState({logging: true})
-    setTimeout(() => navigate('MainScreen'), 3000)
-  };
-
-
   render() {
-    const {logging} = this.state;
+    const {onChangeValue, onSubmit} = this.props
     return (
       <Container>
         <Logo
@@ -67,7 +45,7 @@ export default class extends Component {
               this.passwordInput.focus();
             }}
             underlineColorAndroid="transparent"
-            onChangeText={username => this.setState({ username })}
+            onChangeText={onChangeValue('username')}
           />
         </InputContainer>
 
@@ -87,16 +65,16 @@ export default class extends Component {
             autoCorrect={false}
             secureTextEntry={true}
             underlineColorAndroid="transparent"
-            onChangeText={password => this.setState({ password })}
-            onSubmitEditing={this.login.bind(this)}
+            onChangeText={onChangeValue('password')}
+            onSubmitEditing={onSubmit}
           />
         </InputContainer>
 
         <LoginBtn
           underlayColor="transparent"
-          onPress={this.handleSubmit.bind(this)}
+          onPress={onSubmit}
         >
-          <LoginText>{!logging ? "로그인" : "..."}</LoginText>
+          {this.props.isSubmitting ? <ActivityIndicator /> : <LoginText>로그인</LoginText>}
         </LoginBtn>
 
         <RegisterBtn
@@ -110,7 +88,7 @@ export default class extends Component {
           underlayColor="transparent"
           onPress={() => this.onClickListener('restore_password')}
         >
-          <Text>아이디/비밀번호 찾기</Text>
+          <ForgotAccountText>아이디/비밀번호 찾기</ForgotAccountText>
         </BtnInterface>
       </Container>
     );
@@ -182,5 +160,9 @@ const LoginText = styled.Text `
 `
 
 const RegisterText = styled.Text `
+  color: white;
+`
+
+const ForgotAccountText = styled.Text `
   color: white;
 `
