@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import {AppLoading } from 'expo';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {SafeAreaView} from 'react-native';
 
 import downloadImagesAsync from './assets/assets';
 import Init from './Init.js';
-import reducer from './redux';
+import configureStore from './redux';
+import { PersistGate } from 'redux-persist/integration/react';
 
-let store = createStore(reducer);
+const {persistor, store} = configureStore();
 
 export default class App extends Component {
   state = {
@@ -28,8 +27,9 @@ export default class App extends Component {
     } else {
       return (
         <Provider store={store}>
-          <SafeAreaView style={flex=0} />
-          <Init />
+          <PersistGate persistor={persistor}>
+            <Init />
+          </PersistGate>
         </Provider>
       )
     } 
