@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
+import {AppLoading } from 'expo';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import {SafeAreaView} from 'react-native';
+
 import downloadImagesAsync from './assets/assets';
-import {AppLoading } from 'expo'
-import Init from './Init.js'
+import Init from './Init.js';
+import reducer from './redux';
+
+let store = createStore(reducer);
 
 export default class App extends Component {
   state = {
@@ -19,7 +26,12 @@ export default class App extends Component {
     if (loading) {
       return <AppLoading startAsync={this.loadAssets} onFinish={this.handleLoaded} onError={this.handleError} />
     } else {
-      return <Init />
+      return (
+        <Provider store={store}>
+          <SafeAreaView style={flex=0} />
+          <Init />
+        </Provider>
+      )
     } 
   }
 }
