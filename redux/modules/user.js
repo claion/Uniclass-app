@@ -34,8 +34,8 @@ function login(username, password) {
     return dispatch => authApi.post(endPoints.login, {
         username, password
     }).then(response => {
-        const {access: token, account} = response.data;
-        if (token && account) {
+        const {success, data: {user: account, token}} = response.data;
+        if (success) {
             account.password = password;
             dispatch(setUser(account));
             dispatch(setLogin(token));

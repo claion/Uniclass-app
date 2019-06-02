@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = '' // ngrok
+const API_URL = 'http://22f8801d.ngrok.io' // ngrok
 
 export const endPoints = {
     login: '/auth/login/',
