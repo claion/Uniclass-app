@@ -4,7 +4,8 @@ import {
   Alert
 } from 'react-native';
 import styled from 'styled-components';
-import { MAIN_COLOR } from '../constants/colors';
+import colors from '../../constants/colors';
+import {login} from '../../redux/user/actionsCreators'
 
 
 export default class extends Component {
@@ -15,6 +16,15 @@ export default class extends Component {
       password: '',
       logging: false
     };
+    console.log(props);
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+    const {dispatch} = this.props;
+    const {username, password} = this.state;
+    console.log(username, password);
+    dispatch(login(username, password))
   }
 
   onClickListener = viewId => {
@@ -83,7 +93,7 @@ export default class extends Component {
 
         <LoginBtn
           underlayColor="transparent"
-          onPress={this.login.bind(this)}
+          onPress={this.handleSubmit.bind(this)}
         >
           <LoginText>{!logging ? "로그인" : "..."}</LoginText>
         </LoginBtn>
@@ -110,7 +120,7 @@ const Container = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
-  background-color: ${MAIN_COLOR};
+  background-color: ${colors.MAIN_COLOR};
 `;
 
 const Logo = styled.Image`
