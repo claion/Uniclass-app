@@ -39,6 +39,7 @@ export default class extends Component {
     setTimeout(() => navigate('MainScreen'), 3000)
   };
 
+
   render() {
     const {logging} = this.state;
     return (

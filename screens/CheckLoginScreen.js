@@ -8,7 +8,6 @@ export default class extends React.PureComponent {
             isLoggedIn: false
         }
     }
-    
 
     async componentWillMount () {
         // 디바이스에 토큰이 저장?
