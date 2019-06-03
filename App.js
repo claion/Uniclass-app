@@ -3,6 +3,7 @@ import {AppLoading } from 'expo';
 import { Provider } from 'react-redux';
 
 import downloadImagesAsync from './assets/assets';
+import AppContainerNavigator from './navigators/AppContainerNavigator';
 import Init from './Init.js';
 import configureStore from './redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -28,7 +29,7 @@ export default class App extends Component {
       return (
         <Provider store={store}>
           <PersistGate persistor={persistor}>
-            <Init />
+            <AppContainerNavigator />
           </PersistGate>
         </Provider>
       )

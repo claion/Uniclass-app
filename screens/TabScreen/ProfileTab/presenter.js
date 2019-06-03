@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
 
 export default class HomeTab extends Component {
@@ -12,6 +12,9 @@ export default class HomeTab extends Component {
     render() {
         return (
             <View style={style.container}>
+                <TouchableOpacity onPressOut={this.props.logout}>
+                    <Text style={{color: "black"}}>Logout</Text>
+                </TouchableOpacity>
                 <Text>ProfileTab</Text>
             </View>
         );

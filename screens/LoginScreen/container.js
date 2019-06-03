@@ -26,6 +26,9 @@ export default class extends React.Component {
                     if (!result) {
                         this.setState({isSubmitting:  false})
                         Alert.alert('로그인 실패');
+                    } else {
+                        this.setState({isSubmitting: false});
+                        navigate('MainNavigator')
                     }
                 } catch (e) {
                     this.setState({isSubmitting: false})

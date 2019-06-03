@@ -41,7 +41,7 @@ function login(username, password) {
             dispatch(setLogin(token));
             return true
         } else {
-            console.log('access 또는 account가 제공되지 않음');
+            console.log('token 또는 account가 제공되지 않음');
             return false;
         }
     })
@@ -51,7 +51,7 @@ function login(username, password) {
 // Initial State
 const initialState = {
     isLoggedIn: false,
-    access: ''
+    token: ''
 }
 
 // Reducer
@@ -72,20 +72,19 @@ function reducer(state = initialState, action) {
 // Reducer Functions
 
 const applyLogin = (state, action) => {
-    const {access} = action;
+    const {token} = action;
     return {
         ...state,
         isLoggedIn: true,
-        access
+        token
     }
 }
 
 const applyLogout = () => {
     AsyncStorage.clear();
-    console.log(state);
     return {
         isLoggedIn: false,
-        access: ''
+        token: ''
     }
 }
 
