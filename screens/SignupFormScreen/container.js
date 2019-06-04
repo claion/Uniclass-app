@@ -57,7 +57,11 @@ export default class extends React.Component {
       if (password === password2) {
         try {
           const result = await signup(form);
-          if (result) navigate('LoginScreen');
+
+          if (result) {
+            Alert.alert('회원가입 되었습니다.');
+            navigate('LoginScreen');
+          }
         } catch (e) {
           e.response.data;
           this.setState({
