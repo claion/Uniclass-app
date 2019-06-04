@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import {ActivityIndicator} from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import colors from '../../constants/colors';
 
 export default class extends React.Component {
@@ -12,14 +12,10 @@ export default class extends React.Component {
     isSubmitting: PropTypes.bool.isRequired,
     username: PropTypes.string.isRequired,
     password: PropTypes.string.isRequired
-  }
-
-  onClickListener = viewId => {
-    Alert.alert('알림', viewId + ' 버튼이 눌렸어요');
   };
 
   render() {
-    const {onChangeValue, onSubmit} = this.props
+    const { onChangeValue, onSubmit } = this.props;
     return (
       <Container>
         <Logo
@@ -57,7 +53,9 @@ export default class extends React.Component {
             }}
           />
           <Inputs
-            ref={(ref) => {this.passwordInput = ref}}
+            ref={ref => {
+              this.passwordInput = ref;
+            }}
             returnKeyType="done"
             placeholder="PASSWORD"
             textContentType="password"
@@ -70,23 +68,24 @@ export default class extends React.Component {
           />
         </InputContainer>
 
-        <LoginBtn
-          underlayColor="transparent"
-          onPress={onSubmit}
-        >
-          {this.props.isSubmitting ? <ActivityIndicator /> : <LoginText>로그인</LoginText>}
+        <LoginBtn underlayColor="transparent" onPress={onSubmit}>
+          {this.props.isSubmitting ? (
+            <ActivityIndicator />
+          ) : (
+            <LoginText>로그인</LoginText>
+          )}
         </LoginBtn>
 
         <RegisterBtn
           underlayColor="transparent"
-          onPress={() => this.onClickListener('register')}
+          onPressOut={this.props.onNavigate('SignupNavigator')}
         >
           <RegisterText>회원가입</RegisterText>
         </RegisterBtn>
 
         <BtnInterface
           underlayColor="transparent"
-          onPress={() => this.onClickListener('restore_password')}
+          onPress={this.props.onNavigate('ForgotInfoNavigator')}
         >
           <ForgotAccountText>아이디/비밀번호 찾기</ForgotAccountText>
         </BtnInterface>
@@ -111,7 +110,7 @@ const Logo = styled.Image`
 `;
 
 const InputContainer = styled.View`
-  border-bottom-color: #F5FCFF;
+  border-bottom-color: #f5fcff;
   background-color: white;
   border-radius: 30px;
   border-bottom-width: 1;
@@ -122,47 +121,47 @@ const InputContainer = styled.View`
   align-items: center;
 `;
 
-const Inputs = styled.TextInput `
+const Inputs = styled.TextInput`
   height: 45px;
   margin-left: 16px;
   border-bottom-color: white;
   flex: 1;
-`
+`;
 
-const InputIcon = styled.Image `
+const InputIcon = styled.Image`
   width: 20px;
   height: 20px;
   margin-left: 15px;
   justify-content: center;
-`
+`;
 
-const BtnInterface = styled.TouchableOpacity `
+const BtnInterface = styled.TouchableOpacity`
   height: 45px;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-bottom: 20px;
   width: 250px;
-  border-radius: 20px
-`
+  border-radius: 20px;
+`;
 
 const LoginBtn = styled(BtnInterface)`
   background-color: white;
   border-width: 1.5px;
   border-color: #00b5ec;
-`
+`;
 
 const RegisterBtn = styled(BtnInterface)`
   background-color: #00b5ec;
-`
-const LoginText = styled.Text `
+`;
+const LoginText = styled.Text`
   color: black;
-`
+`;
 
-const RegisterText = styled.Text `
+const RegisterText = styled.Text`
   color: white;
-`
+`;
 
-const ForgotAccountText = styled.Text `
+const ForgotAccountText = styled.Text`
   color: white;
-`
+`;
